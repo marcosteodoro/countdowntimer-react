@@ -7,13 +7,17 @@ import CounterConfigurator from './components/CounterConfigurator'
 export default class App extends React.Component {
   constructor() {
     super()
+
+    this.state = {
+      'showCounter': false
+    }
   }
 
   render() {
     return (
       <div className="App">
         <CounterConfigurator />
-        <Counter />
+        <Counter show={ this.state.showCounter }/>
       </div>
     )
   }

@@ -38,24 +38,16 @@ class Counter extends React.Component {
   }
 
   render() {
+    let componentClassName = 'counter-box'
+    if (!this.props.show) componentClassName = componentClassName.concat(' hidden')
+
     return (
-      <>
-        <div className="counter-box">
-          <CounterUnit unitName="days" unitValue={this.state.days} />
-        </div>
-
-        <div className="counter-box">
-          <CounterUnit unitName="hours" unitValue={this.state.hours} />
-        </div>
-
-        <div className="counter-box">
-          <CounterUnit unitName="minutes" unitValue={this.state.minutes} />
-        </div>
-
-        <div className="counter-box">
-          <CounterUnit unitName="seconds" unitValue={this.state.seconds} />
-        </div>
-      </>
+      <div className={componentClassName} >
+        <CounterUnit unitName="days" unitValue={this.state.days} />
+        <CounterUnit unitName="hours" unitValue={this.state.hours} />
+        <CounterUnit unitName="minutes" unitValue={this.state.minutes} />
+        <CounterUnit unitName="seconds" unitValue={this.state.seconds} />
+      </div>
     )
   }
 }
