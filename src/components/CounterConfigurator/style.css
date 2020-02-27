@@ -1,0 +1,7 @@
+.conter-configurator {
+  display: flex;
+}
+
+.counter-configurator-field {
+  margin: 10px 0;
+}
