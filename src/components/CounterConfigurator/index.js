@@ -10,10 +10,23 @@ export default class ConterConfigurator extends React.Component {
       'date': moment().format('YYYY-MM-DD'),
       'time': moment().add('30', 'minutes').format('h:mm')
     }
+
+    this.handleInput = this.handleInput.bind(this)
   }
 
   handleSubmit(ev) {
     ev.preventDefault()
+  }
+
+  handleInput(ev) {
+    const { name, value }  = ev.target
+
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        [name]: value
+      }
+    })
   }
 
   render() {
@@ -22,13 +35,13 @@ export default class ConterConfigurator extends React.Component {
         <div className="counter-configurator-field">
           <label htmlFor="date">
             Data: 
-            <input type="date" id="date" value={ this.state.date }/>
+            <input type="date" name="date" id="date" value={ this.state.date } onChange={ this.handleInput }/>
           </label>
         </div>
         <div className="counter-configurator-field">
           <label htmlFor="time">
             Hora: 
-            <input type="time" id="time" value={ this.state.time }/>
+            <input type="time" name="time" id="time" value={ this.state.time } onChange={ this.handleInput }/>
           </label>
         </div>
         <div className="counter-configurator-field">
