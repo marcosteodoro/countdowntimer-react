@@ -9,6 +9,7 @@ export default class CountdownCounter extends React.Component {
     super()
 
     this.state = {
+      intervalID: null,
       days: '',
       hours: '',
       minutes: '',
@@ -17,24 +18,46 @@ export default class CountdownCounter extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      const birthday = moment([2020, 2, 7])
+    const intervalID = setInterval(() => {
+      const counterFinish = moment(this.props.date + ' ' + this.props.time, 'YYYY-MM-DD h:mm')
 
       // TODO: REVIEW
-      const days = birthday.diff(moment.now(), 'days')
-      const hours = birthday.diff(moment.now(), 'hours') - (24 * days)
-      const minutes = birthday.diff(moment.now(), 'minutes') - (days * 24 * 60) - (hours * 60)
-      const seconds = birthday.diff(moment.now(), 'seconds') - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60)
+      const days = counterFinish.diff(moment.now(), 'days')
+      const hours = counterFinish.diff(moment.now(), 'hours') - (24 * days)
+      const minutes = counterFinish.diff(moment.now(), 'minutes') - (days * 24 * 60) - (hours * 60)
+      const seconds = counterFinish.diff(moment.now(), 'seconds') - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60)
       // TODO: REVIEW
+      
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          days,
+          hours,
+          minutes,
+          seconds
+        }
+      })
 
-      this.setState({
-        days,
-        hours,
-        minutes,
-        seconds
-      });
-
+      if (
+        days <= 0 &&
+        hours <= 0 &&
+        minutes <= 0 &&
+        seconds <= 0
+      ) {
+        this.stopCountdownCounter()
+      }
     }, 1000);
+
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        intervalID
+      }
+    })
+  }
+
+  stopCountdownCounter() {
+    clearInterval(this.state.intervalID)
   }
 
   render() {

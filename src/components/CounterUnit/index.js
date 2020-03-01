@@ -23,6 +23,7 @@ export default class CounterUnit extends React.Component {
         return 'N'
       case 'seconds':
         return 'E'
+      default:
     }
   }
 }
