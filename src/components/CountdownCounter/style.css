@@ -1,0 +1,9 @@
+.counter-box {
+  color: #9cafb7;
+  display: flex;
+  font-size: 4vw;
+}
+
+.counter-box.hidden {
+  display: none;
+}

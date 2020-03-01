@@ -1,9 +1,7 @@
-.counter-box {
-  color: #9cafb7;
+.conter-configurator {
   display: flex;
-  font-size: 4vw;
 }
 
-.counter-box.hidden {
-  display: none;
+.counter-configurator-field {
+  margin: 10px 0;
 }

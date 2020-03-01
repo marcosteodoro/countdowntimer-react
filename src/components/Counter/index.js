@@ -2,54 +2,61 @@ import React from 'react'
 import moment from 'moment'
 import './style.css'
 
-import CounterUnit from '../CounterUnit'
+import CountdownCounter from '../CountdownCounter'
 
-class Counter extends React.Component {
+export default class Counter extends React.Component {
   constructor() {
     super()
 
     this.state = {
-      days: '',
-      hours: '',
-      minutes: '',
-      seconds: ''
+      'showCountdownCounter': false,
+      'date': moment().format('YYYY-MM-DD'),
+      'time': moment().add('30', 'minutes').format('h:mm')
     }
+
+    this.handleInput = this.handleInput.bind(this)
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      const birthday = moment([2020, 2, 7])
+  handleSubmit(ev) {
+    ev.preventDefault()
+  }
 
-      // TODO: REVIEW
-      const days = birthday.diff(moment.now(), 'days')
-      const hours = birthday.diff(moment.now(), 'hours') - (24 * days)
-      const minutes = birthday.diff(moment.now(), 'minutes') - (days * 24 * 60) - (hours * 60)
-      const seconds = birthday.diff(moment.now(), 'seconds') - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60)
-      // TODO: REVIEW
+  handleInput(ev) {
+    const { name, value }  = ev.target
 
-      this.setState({
-        days,
-        hours,
-        minutes,
-        seconds
-      });
-
-    }, 1000);
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        [name]: value
+      }
+    })
   }
 
   render() {
-    let componentClassName = 'counter-box'
-    if (!this.props.show) componentClassName = componentClassName.concat(' hidden')
-
     return (
-      <div className={componentClassName} >
-        <CounterUnit unitName="days" unitValue={this.state.days} />
-        <CounterUnit unitName="hours" unitValue={this.state.hours} />
-        <CounterUnit unitName="minutes" unitValue={this.state.minutes} />
-        <CounterUnit unitName="seconds" unitValue={this.state.seconds} />
-      </div>
+      <>
+        <form className="counter-configurator" onSubmit={ this.handleSubmit }>
+          <div className="counter-configurator-field">
+            <label htmlFor="date">
+              Data: 
+              <input type="date" name="date" id="date" value={ this.state.date } onChange={ this.handleInput }/>
+            </label>
+          </div>
+          <div className="counter-configurator-field">
+            <label htmlFor="time">
+              Hora: 
+              <input type="time" name="time" id="time" value={ this.state.time } onChange={ this.handleInput }/>
+            </label>
+          </div>
+          <div className="counter-configurator-field">
+            <button>
+              Iniciar
+            </button>
+          </div>
+        </form>
+
+        <CountdownCounter show={ this.state.showCountdownCounter }/>
+      </>
     )
   }
 }
-
-export default Counter
