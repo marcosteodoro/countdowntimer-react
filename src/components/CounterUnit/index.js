@@ -1,17 +1,28 @@
 import React from 'react'
 import './style.css'
 
-class CounterUnit extends React.Component {
+export default class CounterUnit extends React.Component {
   render() {
     return (
       <div className={ "counter-box-unit " + this.props.unitName }>
         <p className="number">
-          { this.props.unitValue }
+          { (this.props.unitValue > 0) ? this.props.unitValue : this.handleNegativeDate() }
         </p>
       <p>{ this.props.unitName }</p>
       </div>
     )
   }
-}
 
-export default CounterUnit
+  handleNegativeDate() {
+    switch (this.props.unitName) {
+      case 'days':
+        return 'D'
+      case 'hours':
+        return 'O'
+      case 'minutes':
+        return 'N'
+      case 'seconds':
+        return 'E'
+    }
+  }
+}
