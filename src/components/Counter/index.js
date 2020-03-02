@@ -48,19 +48,19 @@ export default class Counter extends React.Component {
         <form className="counter-configurator" onSubmit={this.handleSubmit}>
           <div className="counter-configurator-field">
             <label htmlFor="date">
-              Data:
+              Date:
               <input type="date" name="date" id="date" value={this.state.date} onChange={this.handleInput} />
             </label>
           </div>
           <div className="counter-configurator-field">
             <label htmlFor="time">
-              Hora:
+              Hour:
               <input type="time" name="time" id="time" value={this.state.time} onChange={this.handleInput} />
             </label>
           </div>
           <div className="counter-configurator-field">
             <button>
-              Iniciar
+              Start
             </button>
           </div>
         </form>
