@@ -3,6 +3,7 @@ import moment from 'moment'
 import './style.css'
 
 import CountdownCounter from '../CountdownCounter'
+import CountdownSwitchButton from '../CountdownSwitchButton'
 
 export default class Counter extends React.Component {
   constructor() {
@@ -25,7 +26,7 @@ export default class Counter extends React.Component {
       this.setState((prevState) => {
         return {
           ...prevState,
-          'showCountdownCounter': true
+          'showCountdownCounter': !prevState.showCountdownCounter
         }
       })
     }
@@ -59,9 +60,7 @@ export default class Counter extends React.Component {
             </label>
           </div>
           <div className="counter-configurator-field">
-            <button>
-              Start
-            </button>
+          <CountdownSwitchButton text={ (this.state.showCountdownCounter) ? 'Stop' : 'Start' }/>
           </div>
         </form>
 
